@@ -1,0 +1,4 @@
+aws_profile = "<プロファイル名>"
+tfstate_bucket = "バケット名"
+domain_name = "<ドメイン名>"
+acm_arm = "別途作成したacmのarm"

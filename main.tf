@@ -1,9 +1,23 @@
-resource "aws_instance" "example"{
-  ami="ami-0c3fd0f5d33134a76"
-  instance_type="t2.micro"
+provider "aws" {
+  region  = "ap-northeast-1"
+  profile = var.aws_profile
 }
 
-provider "aws" {
-  region = "ap-northeast-1"
-  profile = "improlife"
+terraform {
+  required_version = ">= 1.0.1"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.27"
+    }
+  }
+
+  # 先にs3バケットを作っておく必要がある
+  backend "s3" {
+    # 適当なバケット
+    bucket  = ver.tfstate_backet
+    key     = "terraform.tfstate.aws"
+    region  = "ap-northeast-1"
+    profile = var.aws_profile
+  }
 }
